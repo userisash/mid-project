@@ -61,11 +61,33 @@ body::after{
     color: #fff;
 }
 
+.con-btns{
+    display: flex;
+ 
+    width: 100%;
+    height: 20%;
+    justify-content: space-around;
+    align-items: center;
+    gap: 25px;
+    z-index: 1;
+}
+.con-btns > a{
+    text-decoration: none;
+    border: 1px solid #333;
+    height: 30px;
+    width: 150px;
+    text-align: center;
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    background: url('./img/custom-btn1.png') no-repeat center center/cover;
+    color: #fff;
+}
+
 .controls{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 50%;
+    height: 40%;
     justify-content: center;
     align-items: center;
     gap: 25px;
