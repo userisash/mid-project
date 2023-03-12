@@ -6,7 +6,19 @@ body{
     width: 100vw;
     height: 100vh;
     box-sizing: border-box;
-    background: url('./img/frame2.png') no-repeat center center/cover ;
+    background: url('./img/jungle2.jpg') no-repeat center center/cover ;
+    position: relative;
+}
+
+body::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
 }
 
 
@@ -23,7 +35,7 @@ body{
 .logo{
  font-family: 'VT323', monospace;
  font-size: 60px;
- color: #333;
+ color: #fff;
 }
 
 .btns{
@@ -34,6 +46,7 @@ body{
     justify-content: center;
     align-items: center;
     gap: 25px;
+    z-index: 1;
 }
 
 .btns > a{

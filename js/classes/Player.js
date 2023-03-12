@@ -113,6 +113,7 @@ class Player extends sprite{
          
 
         update(){
+        
         this.updateFrames();
         this.updateHitBox();
 
@@ -143,7 +144,10 @@ class Player extends sprite{
         this.applyGravity()
         this.updateHitBox();
         this.checkForVertivalCollision()
+        // this.checkForGroundCollision()
     }
+
+    
 
 
     updateHitBox(){
@@ -192,6 +196,25 @@ class Player extends sprite{
             }
         }
       }
+
+        checkForGroundCollision () {
+        const playerBottom = this.position.y + this.height;
+        const collisionBoxBelowPlayer = this.collisionBoxes.find(collisionBox =>
+          collisionBox.position.y > playerBottom &&
+          collisionBox.position.y < playerBottom + this.velocity.y &&
+          this.position.x + this.width > collisionBox.position.x &&
+          this.position.x < collisionBox.position.x + collisionBox.width
+        );
+      
+        if (collisionBoxBelowPlayer) {
+          this.position.y = collisionBoxBelowPlayer.position.y - this.height;
+          this.velocity.y = 0;
+          this.isOnGround = true;
+        } else {
+          this.isOnGround = false;
+        }
+      };
+      
 
 
             applyGravity() {
@@ -247,31 +270,5 @@ class Player extends sprite{
              }
          }
       }
-
-      spawnCoin() {
-        const coin = document.createElement('div');
-        coin.className = 'coin';
-        coin.style.left = Math.floor(Math.random() * (canvas.width -10)) + 'px';
-        coin.style.top = Math.floor(Math.random() * (canvas.height -10)) + 'px';
-        coinContainer.appendChild(coin);
-    
-        coin.addEventListener('collision', () => {
-          this.handleCollision(coin);
-        });
-      }
-    
-      handleCollision(coin) {
-        coin++;
-        coin.remove();
-      }
-    
-      startSpawningCoins(interval) {
-        this.coinIntervalId = setInterval(() => {
-          this.spawnCoin();
-        }, interval);
-      }
-
-      
-
 }
 

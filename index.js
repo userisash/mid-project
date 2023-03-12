@@ -188,6 +188,7 @@ function animate(){
 
     player.checkForHorizontalCanvasCollision();
     player.update();
+
     
     player.velocity.x = 0;
     if(keys.d.pressed){
@@ -195,14 +196,14 @@ function animate(){
         player.velocity.x = 2
         player.lastDirections = 'right'
         player.shouldPanCameraToTheLeft({canvas, Camera});
-
+        
     }else if(keys.a.pressed){
         // player.switchSprite('RunLeft')
         player.switchSprite('RunLeft')
         player.velocity.x = -2
         player.lastDirections = 'left'
         player.shouldPanCameraToTheRight({canvas, Camera});
-
+        
     }else if(player.velocity.y === 0){
         if(player.lastDirections === 'right'){
             player.switchSprite('Idle')
@@ -210,7 +211,7 @@ function animate(){
             player.switchSprite('IdleLeft')
         }
     }
-
+    
     if(player.velocity.y < 0){
         player.shouldPanCameraDown({canvas, Camera})
         if(player.lastDirections === 'left'){
@@ -218,7 +219,7 @@ function animate(){
         }else{
             player.switchSprite('JumpLeft')
         }
-
+        
     }else if(player.velocity.y > 0){
         player.shouldPanCameraUp({canvas, Camera})
         if(player.lastDirections === 'right'){
@@ -227,18 +228,27 @@ function animate(){
             player.switchSprite('FallLeft')
         }
     }
-
-    if(keys.w.pressed = false && player.velocity.y === 0){
-        landsound.play()
-    }
-    player.startSpawningCoins(300);
-
+    
+//     const groundLevel = canvas.height - 16; // assuming the ground is 16 pixels from the bottom of the canvas
+//   if (player.position.y + player.height >= groundLevel) {
+//     player.position.y = groundLevel - player.height; // snap player to ground
+//     player.velocity.y = 0; // stop vertical movement
+//     player.isJumping = false; // reset jumping flag
+//   }
+    
     
     context.restore();
-
-
+    
+    
 }
 animate();
+const isGrounded = true;
+
+// if(this.position.y - this.height){
+//     isGrounded = true
+// }else{
+//     isGrounded = false
+// }
 
 window.addEventListener('keydown', (e) =>{
     switch(e.key){
