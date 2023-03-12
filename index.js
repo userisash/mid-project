@@ -64,8 +64,8 @@ const gravity = 0.1;
 
 const player= new Player( {
     position:{
-        x: 0,
-        y: 0,
+        x: 100,
+        y: 300,
     },
     collisionBlocks,
     platformCollisionBlocks,
@@ -231,7 +231,7 @@ function animate(){
     if(keys.w.pressed = false && player.velocity.y === 0){
         landsound.play()
     }
-    player.startSpawningCoins(3000);
+    player.startSpawningCoins(300);
 
     
     context.restore();
