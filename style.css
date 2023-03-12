@@ -61,4 +61,18 @@ body::after{
     color: #fff;
 }
 
+.controls{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    font-family: 'VT323', monospace;
+    font-size: 25px;
+    color: #fff;
+    z-index: 1;
+}
+
 

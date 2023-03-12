@@ -189,6 +189,7 @@ function animate(){
     player.checkForHorizontalCanvasCollision();
     player.update();
 
+
     
     player.velocity.x = 0;
     if(keys.d.pressed){
@@ -211,7 +212,6 @@ function animate(){
             player.switchSprite('IdleLeft')
         }
     }
-    
     if(player.velocity.y < 0){
         player.shouldPanCameraDown({canvas, Camera})
         if(player.lastDirections === 'left'){
@@ -227,28 +227,19 @@ function animate(){
         }else{
             player.switchSprite('FallLeft')
         }
+    }else if (collisionBox.height === 0){
+        player.isOnGround = true
+    }else{
+        player.isOnGround = false
     }
-    
-//     const groundLevel = canvas.height - 16; // assuming the ground is 16 pixels from the bottom of the canvas
-//   if (player.position.y + player.height >= groundLevel) {
-//     player.position.y = groundLevel - player.height; // snap player to ground
-//     player.velocity.y = 0; // stop vertical movement
-//     player.isJumping = false; // reset jumping flag
-//   }
-    
-    
+
     context.restore();
     
     
 }
 animate();
-const isGrounded = true;
 
-// if(this.position.y - this.height){
-//     isGrounded = true
-// }else{
-//     isGrounded = false
-// }
+
 
 window.addEventListener('keydown', (e) =>{
     switch(e.key){

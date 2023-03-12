@@ -11,7 +11,8 @@ class Player extends sprite{
         imageSrc, 
         frameRate, 
         scale = 0.5, 
-        animations }){
+        animations,
+        isOnGround }){
 
         super({ imageSrc, frameRate, scale })
         this.position = position;
@@ -32,6 +33,7 @@ class Player extends sprite{
 
         this.animations = animations;
         this.lastDirections = 'right';
+        this.isOnGround = true;
 
         for(let Key in this.animations){
             const image = new Image()
@@ -110,6 +112,25 @@ class Player extends sprite{
             }
          }
 
+         checkForGroundCollision () {
+            const playerBottom = this.position.y + this.height;
+            const collisionBoxBelowPlayer = this.collisionBlocks.find(collisionBox =>
+              collisionBox.position.y > playerBottom &&
+              collisionBox.position.y < playerBottom + this.velocity.y &&
+              this.position.x + this.width > collisionBox.position.x &&
+              this.position.x < collisionBox.position.x + collisionBox.width
+            );
+          
+            if (collisionBoxBelowPlayer) {
+              this.position.y = collisionBoxBelowPlayer.position.y - this.height;
+              this.velocity.y = 0;
+              this.isOnGround = true;
+            } else {
+              this.isOnGround = false;
+            }
+          }
+          
+          
          
 
         update(){
@@ -196,25 +217,6 @@ class Player extends sprite{
             }
         }
       }
-
-        checkForGroundCollision () {
-        const playerBottom = this.position.y + this.height;
-        const collisionBoxBelowPlayer = this.collisionBoxes.find(collisionBox =>
-          collisionBox.position.y > playerBottom &&
-          collisionBox.position.y < playerBottom + this.velocity.y &&
-          this.position.x + this.width > collisionBox.position.x &&
-          this.position.x < collisionBox.position.x + collisionBox.width
-        );
-      
-        if (collisionBoxBelowPlayer) {
-          this.position.y = collisionBoxBelowPlayer.position.y - this.height;
-          this.velocity.y = 0;
-          this.isOnGround = true;
-        } else {
-          this.isOnGround = false;
-        }
-      };
-      
 
 
             applyGravity() {
